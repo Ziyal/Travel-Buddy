@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add a Trip</title>
+  </head>
+  <body>
+    <form action="{% url 'login:logout' %}" method="POST">
+      {% csrf_token %}
+      <input class="logout" type="submit" value="Logout">
+    </form>
+    <form action="{% url 'project:index' %}" method="POST">
+      {% csrf_token %}
+      <input class="logout" type="submit" value="Home">
+    </form>
+
+    <h2>Add a Trip</h2>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+          <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}    
+    <form action="{% url 'project:process_trip' %}" method="POST">
+      {% csrf_token %}
+      <b>Destination:</b> <input type="text" name="destination"><br>
+      <b>Description:</b> <input type="text" name="description"><br>
+      <b>Travel Date From:</b> <input type="date" name="date_from"><br>
+      <b>Travel Date To:</b> <input type="date" name="date_to"><br>
+      <input type="submit" name="submit" value="Add">
+    </form>
+  </body>
+</html>

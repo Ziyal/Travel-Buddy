@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Trip</title>
+  </head>
+  <body>
+    <form action="{% url 'login:logout' %}" method="POST">
+      {% csrf_token %}
+      <input class="logout" type="submit" value="Logout">
+    </form>
+    <form action="{% url 'project:index' %}" method="POST">
+      {% csrf_token %}
+      <input class="logout" type="submit" value="Home">
+    </form>
+
+    <h1>{{trips.destination}}</h1>
+    <b>Planned By:</b> {{trips.creator.name}}<br>
+    <b>Description:</b> {{trips.description}}<br>
+    <b>Travel Date From:</b> {{trips.date_from}}<br>
+    <b>Travel Date To:</b> {{trips.date_to}}<br>
+
+    <i><p>Other users' joining the trip:</p></i>
+    <ul>
+      {% for user in buddy_trip %}
+      <li>{{user.name}}</li>
+      {% endfor %}
+
+
+  </body>
+</html>
