@@ -1,0 +1,56 @@
+.topbar {
+  text-align: right;
+  vertical-align: top;
+  /*width: 100%;*/
+  margin-right: 30px;
+  margin-top: 15px;
+}
+
+.title-text {
+  text-align: left;
+  font-size: 16px;
+  font-style: bold;
+}
+
+.info {
+  width: 400px;
+  text-align: left;
+}
+
+form {
+  display: inline-block;
+}
+
+h5 {
+  display: inline-block;
+}
+
+h4 {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+p {
+  margin-top: 10px;
+  margin-bottom: 3px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/*.btn {
+  width: 200px;
+  margin-top: 10px;
+}*/
+
+.form-container {
+  text-align: center;
+}
+
+.input {
+  width: 200px;
+}

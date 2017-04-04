@@ -3,32 +3,46 @@
   <head>
     <meta charset="utf-8">
     <title>Add a Trip</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/custom-add.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <form action="{% url 'login:logout' %}" method="POST">
-      {% csrf_token %}
-      <input class="logout" type="submit" value="Logout">
-    </form>
-    <form action="{% url 'project:index' %}" method="POST">
-      {% csrf_token %}
-      <input class="logout" type="submit" value="Home">
-    </form>
+    <div class="topbar">
+      <h4>Hello, {{request.session.name}}!</h4>
+      <form action="{% url 'login:logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout" class="btn btn-default btn-xs">
+      </form>
+      <form action="{% url 'project:index' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Home" class="btn btn-default btn-xs">
+      </form>
+      <hr>
+    </div>
 
-    <h2>Add a Trip</h2>
-    {% if messages %}
-    <ul>
-      {% for message in messages %}
-          <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}    
-    <form action="{% url 'project:process_trip' %}" method="POST">
-      {% csrf_token %}
-      <b>Destination:</b> <input type="text" name="destination"><br>
-      <b>Description:</b> <input type="text" name="description"><br>
-      <b>Travel Date From:</b> <input type="date" name="date_from"><br>
-      <b>Travel Date To:</b> <input type="date" name="date_to"><br>
-      <input type="submit" name="submit" value="Add">
-    </form>
+    <div class="form-container">
+      <h2>Add a Trip</h2>
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <div class="form-container">
+          <form action="{% url 'project:process_trip' %}" method="POST" class="form-inline">
+            <div class="form-group">
+            {% csrf_token %}
+            <p>Destination:</p> <input type="text" class="form-control" name="destination">
+            <p>Description:</p> <input type="text" class="form-control" name="description">
+            <p>Travel Date From:</p> <input type="date" class="form-control" name="date_from">
+            <p>Travel Date To:</p> <input type="date" class="form-control" name="date_to"><br>
+            <input type="submit" value="Add" class="btn btn-default">
+            </div>
+          </form>
+      </div>
+    </div>
   </body>
 </html>

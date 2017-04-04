@@ -4,66 +4,83 @@
     <meta charset="utf-8">
     <title>Travel Buddy</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'project/css/style.css' %}" />
-  </head>
-  <body>
-    <h3>Hello, {{request.session.name}}!</h3>
-    <form action="{% url 'login:logout' %}" method="POST">
-      {% csrf_token %}
-      <input class="logout" type="submit" value="Logout">
-    </form>
-
-    <h3>Your Trip Schedule:</h3>
-      <table style="width:50%">
-        <tr>
-          <th>Destination</th>
-          <th>Travel Start Date</th>
-          <th>Travel End Date</th>
-          <th>Plan</th>
-        </tr>
-        {% if created_by_me %}
-        {% for item in created_by_me %}
-        <tr>
-          <td><a href="{% url 'project:trip' id=item.id %}">{{item.destination}}</a></td>
-          <td>{{item.date_from}}</td>
-          <td>{{item.date_to}}</td>
-          <td>{{item.description}}</td>
-        </tr>
-        {% endfor %}
-        {% endif %}
-      </table>
-
-      <h3>Other Users' Travel Plans:</h3>
-        <table style="width:55%">
-          <tr>
-            <th>Name</th>
-            <th>Destination</th>
-            <th>Travel Start Date</th>
-            <th>Travel End Date</th>
-            <th>Do you want to join?</th>
-          </tr>
-          {% if created_by_other %}
-          {% for item in created_by_other %}
-          <tr>
-            <td>{{item.creator.name}}</td>
-            <td><a href="{% url 'project:trip' id=item.id %}">{{item.destination}}</a></td>
-            <td>{{item.date_from}}</td>
-            <td>{{item.date_to}}</td>
-            <td>
-              <form action="{% url 'project:join' id=item.id %}" method="POST">
-                {% csrf_token %}
-                <input type="submit" value="Join Trip">
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
-          {% endif %}
-        </table>
-
-        <br>
-        <form action="{% url 'project:add_travel_plan' %}" method="POST">
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/custom-index.css' %}" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <body>
+     <div class="container">
+      <div class="topbar-left">
+        <label class="title-text">Travel Buddy</label class="title-text">
+      </div>
+      <div class="topbar-right pull-right">
+        <h4>Hello, {{request.session.name}}!</h4>
+        <form class="logout" action="{% url 'login:logout' %}" method="POST">
           {% csrf_token %}
-          <input class="logout" type="submit" value="Add Travel Plan">
+          <input class="btn btn-default btn-xs" type="submit" value="Logout">
         </form>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+        <h3>Your Trip Schedule:</h3>
+          <table class="table table-hover">
+            <thead class="thead-inverse">
+              <tr>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Plan</th>
+              </tr>
+            </thead>
+            {% if created_by_me %}
+            {% for item in created_by_me %}
+            <tbody>
+              <tr>
+                <td><a href="{% url 'project:trip' id=item.id %}">{{item.destination}}</a></td>
+                <td>{{item.date_from}}</td>
+                <td>{{item.date_to}}</td>
+                <td>{{item.description}}</td>
+              </tbody>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </table>
+
+          <h3>Other Users' Travel Plans:</h3>
+            <table class="table table-hover">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Name</th>
+                  <th>Destination</th>
+                  <th>Travel Start Date</th>
+                  <th>Travel End Date</th>
+                  <th>Do you want to join?</th>
+                </tr>
+              </thead>
+              {% if created_by_other %}
+              {% for item in created_by_other %}
+              <tbody>
+                <tr>
+                  <td>{{item.creator.name}}</td>
+                  <td><a href="{% url 'project:trip' id=item.id %}">{{item.destination}}</a></td>
+                  <td>{{item.date_from}}</td>
+                  <td>{{item.date_to}}</td>
+                  <td>
+                    <form action="{% url 'project:join' id=item.id %}" method="POST">
+                      {% csrf_token %}
+                      <input class="btn btn-info" type="submit" value="Join Trip">
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+              {% endfor %}
+              {% endif %}
+            </table>
+            <form action="{% url 'project:add_travel_plan' %}" method="POST">
+              {% csrf_token %}
+              <input class="btn btn-success" type="submit" value="Add Travel Plan">
+            </form>
+      </div>
   </body>
 </html>

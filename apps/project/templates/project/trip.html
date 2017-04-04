@@ -3,29 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Trip</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'project/css/custom-trip.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <form action="{% url 'login:logout' %}" method="POST">
-      {% csrf_token %}
-      <input class="logout" type="submit" value="Logout">
-    </form>
-    <form action="{% url 'project:index' %}" method="POST">
-      {% csrf_token %}
-      <input class="logout" type="submit" value="Home">
-    </form>
+    <div class="topbar">
+      <h4>Hello, {{request.session.name}}!</h4>
+      <form action="{% url 'login:logout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout" class="btn btn-default btn-xs">
+      </form>
+      <form action="{% url 'project:index' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Home" class="btn btn-default btn-xs">
+      </form>
+      <hr>
+    </div>
 
-    <h1>{{trips.destination}}</h1>
-    <b>Planned By:</b> {{trips.creator.name}}<br>
-    <b>Description:</b> {{trips.description}}<br>
-    <b>Travel Date From:</b> {{trips.date_from}}<br>
-    <b>Travel Date To:</b> {{trips.date_to}}<br>
+    <div class="info-container">
+      <h1>{{trips.destination}}</h1>
+      <div class="info">
+        <label class="title-text">Planned By:</label> {{trips.creator.name}}<br>
+        <label class="title-text">Description:</label> {{trips.description}}<br>
+        <label class="title-text">Travel Date From:</label> {{trips.date_from}}<br>
+        <label class="title-text">Travel Date To:</label> {{trips.date_to}}<br><br>
 
-    <i><p>Other users' joining the trip:</p></i>
-    <ul>
-      {% for user in buddy_trip %}
-      <li>{{user.name}}</li>
-      {% endfor %}
 
+        <i><p>Other users' joining the trip:</p></i>
+        <ul>
+          {% for user in buddy_trip %}
+          <li>{{user.name}}</li>
+          {% endfor %}
+      </div>
+    </div>
 
   </body>
 </html>

@@ -1,0 +1,64 @@
+#container {
+  text-align: center;
+}
+
+.login-container {
+  text-align: center;
+}
+
+#login {
+  width: 225px;
+  height: 400px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+
+#register {
+  width: 225px;
+  height: 400px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+
+.header-container {
+  text-align: center;
+
+}
+
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.btn {
+  width: 200px;
+  margin-top: 10px;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.message-container {
+/*width: 500px;*/
+}
+
+.messages {
+  width: 500px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.alert:alert-warning {
+  width: 200px;
+
+}
